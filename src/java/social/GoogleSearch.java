@@ -21,8 +21,8 @@ public class GoogleSearch
 	private String query;
 	private JSONArray googleSearchResult;
 	//private static final String searchUrl = "https://www.google.com/search?num=100&q=";
-        private static final String apiUrl = "https://www.googleapis.com/customsearch/v1?num=10&key=AIzaSyBUfGe7civQnhIwdrW1Pk1fyEZDIfZqOhs&cx=007465795120590430405:8mnsjjwxivg";
-
+        private static final String apiUrl = "https://www.googleapis.com/customsearch/v1?num=10&key=*******"; // use your own token here for google customer search.
+            // or you can just call the searchUrl for seach, it could make you be banned or rederict to a robot test page.
 	public GoogleSearch(String query)
 	{
 		this.setQuery(query);

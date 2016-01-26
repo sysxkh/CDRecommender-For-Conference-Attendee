@@ -21,9 +21,10 @@ import org.jsoup.nodes.Document;
 public class SocialInfo 
 {
 	private String name;
-//	private static final String token = "94365990226b28dbb57b60ecae24f85ae2b1f445";
+//	private static final String token = "";
 	//private static final String apiUrl = "http://readability.com/api/content/v1/parser?";
-        private static final String apiUrl = "http://picso.org:8889/~highman/GoogleMonitor/Read.php?url=";
+        private static final String apiUrl = "*** Some link that can do like readability api***"; // please use yours API
+        // change this function  readParser() also
 
         private String infomation;
         private String dir;
@@ -391,7 +392,7 @@ public class SocialInfo
 		return true;
 	}
         
-        private JSONObject readParser(Document readDoc)
+        private JSONObject readParser(Document readDoc)  // this one maybe change if you use differenent API
         {
             JSONObject readJSON = new JSONObject();
             String result = readDoc.text();
