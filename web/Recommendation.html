@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Recommendation</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+                <link rel="stylesheet" media="all" href="assets/css/jquery.dynatable.css">
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+                <style type="text/css">
+                th {word-wrap: break-word}
+                td {word-wrap: break-word}
+
+                </style>
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header">
+						<h1><a href="index.html">Home Page</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Cross Domains Recommender</a></li>
+										<!--	<li><a href="AuthorPage.html">Author Page</a></li>
+											<li><a href="DashBoard.html">DashBoard</a></li>
+                                                                                        <li><a href="Recommendation.html">Recommendation</a></li> -->
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Main -->
+					<article id="main">
+						<header>
+							<h2 id="name" style="margin-bottom: 30px">Recommendation List</h2>
+                                                        <h2 style="text-transform: none"> Introduction : </h2>
+                                                        
+                                                        <p style="text-align: left; margin-left: 100px;text-transform: none">This recommendation list shows the people that attends the same conference.<br>
+                                                            The recommending is according to a score. This score is consist of two other socre: <br>
+                                                            First, the<b> Content Similarity</b>(CS) between those two authors, which calculated by Vector Space Model.<br>
+                                                            ----The contents are from<b> Google Scholar,ResearchGate,Twitter,Wiki and other google search result</b>.<br>
+                                                            Second, the<b> Jaccards score</b>(JC) between you and other people, which calculated by Jaccard Coefficient. <br>
+                                                            ----The relationship networks are from<b> Google Scholar,ResearchGate,Twitter</b>.<br>
+                                                            Those two scores both have 50% weight in the final score.<br></p>
+                                                   
+                                                        
+							
+                                                       
+                                                        <div id="result">
+                                                            <table id="RTable" style="table-layout: fixed; width: 100%">
+                                                            <thead>
+                                                            <th >Name</th>
+                                                            <th  data-dynatable-column="GoogleScholarCS">GoogleScholar_CS</th>
+                                                            <th  data-dynatable-column="ResearchGateCS">ResearchGate_CS</th>
+                                                            <th  data-dynatable-column="TwitterCS">Twitter_CS</th>
+                                                            <th  data-dynatable-column="WikiCS">Wiki_CS</th>
+                                                            <th  data-dynatable-column="NormalCS">OtherSearchResult_CS</th>
+                                                            <th  data-dynatable-column="GoogleScholarJC">GoogleScholar_ JC</th>
+                                                            <th  data-dynatable-column="ResearchGateJC">ResearchGate_ JC</th>
+                                                            <th  data-dynatable-column="TwitterJC">Twitter_ JC</th>
+                                                            <th  data-dynatable-column="TotalCS">Total_CS</th>
+                                                            <th  data-dynatable-column="TotalJC">Total_ JC</th>
+                                                            <th  data-dynatable-column="Total">Total</th>                                                        
+                                                            </thead>
+                                                            <tbody>
+                                                            </tbody>
+                                                            </table>
+                                                        </div>
+						</header>
+
+					</article>
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled</li><li>Design: <a href="">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+                        <script src="assets/js/jquery.dynatable.js"></script>
+                        <script type="text/javascript">
+                            
+                            function GetQueryString(name)
+                            {
+                                 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                                 var r = decodeURI(window.location.search.substr(1)).match(reg);
+                                 if(r!=null)return  unescape(r[2]); return null;
+                            }
+                            
+                        </script>
+                        <script type="text/javascript">
+                        $(document).ready(function()
+                         {
+                            var name=GetQueryString("name");
+                            var cid =GetQueryString("cid");
+                                 
+                            if(name==null || cid==null)
+                            {
+                                alert("Please select conference id and name");
+                                window.location = "index.html";
+                            }
+                            $("#name").html("Recommendation List for "+name.replace("+"," "));
+                            $("title").html($("title").html()+" "+name.replace("+"," "));
+                            $.ajax({
+                            url: "./getSocialRecommendation",
+                            type: "POST",
+                            contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                            data: {"name":name,"cid":cid},                           
+                            success: function(data){ 
+                                if(data!="")
+                                {
+                                    var info = JSON.parse(data.toString());
+                                    $("#RTable").dynatable({ 
+                                         dataset: { perPageDefault: 20,perPageOptions:[20] , records: info },
+                                         
+                                         writers:{ 'name':function(record) {
+                                                return "<a href =\"DashBoard.html?name="+record['name']+"&cid="+cid+"\" target=\"_blank\" >"+record['name']+"</a>";},
+                                            'Total': function(record){return record['Total']+"%";},
+                                            'GoogleScholarCS': function(record){return record['GoogleScholarCS']+"%";},
+                                            'ResearchGateCS': function(record){return record['ResearchGateCS']+"%";},
+                                            'TwitterCS': function(record){return record['TwitterCS']+"%";},
+                                            'WikiCS': function(record){return record['WikiCS']+"%";},
+                                            'NormalCS': function(record){return record['NormalCS']+"%";},
+                                            'GoogleScholarJC': function(record){return record['GoogleScholarJC']+"%";},
+                                            'ResearchGateJC': function(record){return record['ResearchGateJC']+"%";},
+                                            'TwitterJC': function(record){return record['TwitterJC']+"%";},
+                                            'TotalCS': function(record){return record['TotalCS']+"%";},
+                                            'TotalJC': function(record){return record['TotalJC']+"%";},
+                                        }
+                                    });
+
+                                    $("#dynatable-query-search-RTable").css("background-color","black");
+                                    $("#dynatable-per-page-RTable").parent().hide();
+                                }                       
+                                else
+                                    $("#result").html("No Data !");
+                             },
+                            dataType: "text" });
+                                    
+                            
+                        
+                         });
+                     </script>
+	</body>
+</html>

@@ -1,0 +1,214 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>View the social recommendation for conference authors!</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+	</head>
+	<body class="landing">
+
+		<!-- Page Wrapper -->
+			<div id="page-wrapper">
+
+				<!-- Header -->
+					<header id="header" class="alt">
+						<h1><a href="index.html">Home Page</a></h1>
+						<nav id="nav">
+							<ul>
+								<li class="special">
+									<a href="#menu" class="menuToggle"><span>Menu</span></a>
+									<div id="menu">
+										<ul>
+											<li><a href="index.html">Cross Domains Recommender</a></li>
+										<!--	<li><a href="AuthorPage.html">Author Page</a></li>
+											<li><a href="DashBoard.html">DashBoard</a></li>
+                                                                                        <li><a href="Recommendation.html">Recommendation</a></li>	-->										
+										</ul>
+									</div>
+								</li>
+							</ul>
+						</nav>
+					</header>
+
+				<!-- Banner -->
+					<section id="banner">
+						<div class="inner">
+							<h2>Cross Domains Recommender</h2>
+                                                        <p style="text-transform: none">Choose the conferences:<br />
+							</p>
+							<ul class="actions">
+                                                            <li>
+                                                                <select id="cid">
+                                                                    <option value="136">HyperText 2015</option>
+                                                                    <option value="134">UMAP 2015</option>
+                                                                    <option value="135">AIED 2015 & EDM 2015</option>
+                                                                </select>
+                                                            </li>
+							</ul>
+                                                        <a href="#one" id="getAL" class="scrolly" >Get the Authors List</a>
+                                                        <p style="text-transform: none;margin-top: 50px">This website is for doing recommendation to people who are in the same conference. <br>
+                                                            The information is from Google Search by using the name as query.
+                                                        </p>
+						</div>
+						
+					</section>
+
+				<!-- One -->
+					<section id="one" class="wrapper style1 special">
+						<div class="inner">
+							<header class="major" id="head">								
+                                                                <h2 id="conference" style="text-transform: none"> </h2>
+                                                                <h3 style="text-transform: none ; border-bottom:none;font-size:100%">Click The Name for DashBoard,Click the "List" for Recommendation List</h3>
+							</header>
+                                                    <table id="AL">
+                                                        <tr>
+                                                            <th>The Name:</th>
+                                                            <th>Affiliations:</th>
+                                                            <th>Recommendation:</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>N/A</td>
+                                                            <td>N/A</td>
+                                                            <td>N/A</td>
+                                                        </tr>
+                                                       
+                                                        
+                                                    </table>
+						</div>
+					</section>
+
+
+				<!-- Footer -->
+					<footer id="footer">
+						<ul class="icons">
+							<li><a href="#" class="icon fa-twitter"><span class="label">Twitter</span></a></li>
+							<li><a href="#" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
+							<li><a href="#" class="icon fa-instagram"><span class="label">Instagram</span></a></li>
+							<li><a href="#" class="icon fa-dribbble"><span class="label">Dribbble</span></a></li>
+							<li><a href="#" class="icon fa-envelope-o"><span class="label">Email</span></a></li>
+						</ul>
+						<ul class="copyright">
+							<li>&copy; Untitled</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+						</ul>
+					</footer>
+
+			</div>
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+                        <script type="text/javascript">
+                        $(document).ready(function()
+                         {
+                             var name;
+                             var affiliation;
+                             var cid_session;
+                             var hasSession = false;
+                             
+                             
+//                             $.ajax({
+//                                url: "./getSession",
+//                                type: "POST",
+//                                data: {},
+//                                success: function(data){ 
+//                                    if(data != "null")
+//                                    {
+//                                        var d = JSON.parse(data);
+//                                        name = d.name;
+//                                        affiliation = d.affiliation;
+//                                        cid_session = d.cid; 
+//                                        hasSession = true;
+//                                    }
+//                                 },
+//                                dataType: "text" });
+
+                                $("#getAL").click(function()
+                                {
+                                    var cid = $("#cid").val();
+                                    var cname = "";
+                                    if(cid=="136")
+                                        cname="HyperText 2015";
+                                    if(cid=="134")
+                                        cname= "UMAP 2015";
+                                    if(cid=="135")
+                                        cname= "AIED 2015 & EDM 2015";
+                                    $("#conference").html("Conference Author List - "+cname)
+                                           $.ajax({
+                                           url: "./getAuthorsList",
+                                           type: "POST",
+                                           data: {"cid":cid},
+                                           contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                                           beforeSend: function(){
+                                              $("#AL").html("Getting.....");
+                                           },
+                                           success: function(data){                                                
+                                                   $("#AL").html(data);
+                                               }
+                                           });
+                                });
+                            });
+                                          
+//                                                   $("tr").click(function()
+//                                                   {
+//                                                       var tr = $(this);
+//                                                       name = tr.children().first().text();
+//                                                       affiliation = tr.children().last().text();
+//                                                       
+//                                                       $.ajax({
+//                                                           url: "./setAuthor",
+//                                                           type: "POST",
+//                                                           data: {"name":name,"affiliation":affiliation,"cid":cid},                                                        
+//                                                           success: function(data){ 
+//                                                                   $("#head").html(data);
+//                                                                   $("tr").each(function(){
+//                                                                     $(this).css("border","0");
+//                                                                     $(this).css("background-color","");  
+//                                                                   });
+//                                                                   tr.css("border","black solid thin");
+//                                                                   tr.css("background-color","black");
+//                                                            },
+//                                                           dataType: "text" });
+//                                                   });
+//                                                   $("tr").first().click(function(){ var a =0; });
+//                                                   if(hasSession)
+//                                                   {
+//                                                        var hasName = false
+//                                                            $("tr").each(function(){
+//                                                                var n = $(this).children().first().text();
+//                                                                if(n==name)
+//                                                                {   
+//                                                                    hasName = true;
+//                                                                     var info = "<h2> You are : "+name+" @ "+affiliation+"</h2>";
+//                                                                     $("#head").html(info); 
+//                                                                     $(this).css("border","black solid thin");
+//                                                                     $(this).css("background-color","black");
+//                                                                }
+//                                                            });
+//                                                       if(!hasName)
+//                                                           $("#head").html("<h2>Choose who you are in the list</h2>");
+//                                                       
+//                                                   }
+//                                            },
+//                                           dataType: "text" });
+//                                 });
+                            
+
+ //                           });
+                     
+                     </script>
+	</body>
+</html>

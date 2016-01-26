@@ -1,0 +1,110 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @n33co
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Profile</title>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
+		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+                <style type="text/css">
+                .features li {padding-bottom: 1em;padding-top: 1em; padding-left: 1em;padding-right:1em ; background-color:rgba(0, 0, 0, 0.14); border-top: none}
+                h2 {margin-top:75px}
+                h3 {text-transform: none}
+                
+                </style>
+	</head>
+	<body>
+
+		<!-- Page Wrapper -->
+			
+
+				<!-- Header -->
+
+
+				<!-- Main -->
+					<article id="main">
+						<header >						
+                                                        <div id="result">
+                                                        </div>
+						</header>
+
+					</article>
+
+				<!-- Footer -->
+
+
+			
+
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/skel.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
+			<script src="assets/js/main.js"></script>
+                        <script type="text/javascript">
+                            
+                            function GetQueryString(name)
+                            {
+                                 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+                                 var r = decodeURI(window.location.search.substr(1)).match(reg);
+                                 if(r!=null)return  unescape(r[2]); return null;
+                            }
+                            
+                        </script>
+                        
+                        <script type="text/javascript">
+                        $(document).ready(function()
+                         {
+                                
+                                 var name=GetQueryString("name");
+                                 var cid =GetQueryString("cid");
+                                 
+                                 if(name==null || cid==null)
+                                 {
+                                     alert("Please select conference id and name");
+                                     window.location = "index.html";
+                                 }
+                                 $("title").html($("title").html()+" "+decodeURI(name));
+                                 var u = "./getDashBoard?name="+name+"&cid="+cid;
+                                // u = encodeURI(u);
+                                $.ajax({
+                                url: u,
+                                type: "POST",
+                                contentType:"application/x-www-form-urlencoded; charset=UTF-8",
+                                data: {},
+                                beforeSend: function(){
+                                   $("#result").html("Getting.....");
+                                },
+                                success: function(data){ 
+                                        $("#result").html(data); 
+                                        var bg = 0.035;                                      
+                                        $("ul.features").each(                                               
+                                                function(){                                                   
+                                                    $(this).children().each(
+                                                            function(index){
+                                                                var bgc = bg*index;
+                                                                if(bgc>=0.5)
+                                                                    bgc = 0.5;
+                                                                var color = "rgba(0, 0, 0, "+bgc+")";
+                                                                $(this).css("background-color",color);
+                                                            }
+                                                            );                                                   
+                                                }
+                                                );
+                                 },
+                                dataType: "text" });
+                          
+                         
+                         });
+                     </script>
+	</body>
+</html>
